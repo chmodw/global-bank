@@ -18,6 +18,6 @@ if (!isset($page_title)) {
     </header>
     <navigation>
         <ul>
-            <li><a href="index.php">Menu</a></li>
+            <li><a href="<?php echo WWW_ROOT . '/staff/index.php'; ?>">Menu</a></li>
         </ul>
     </navigation>
