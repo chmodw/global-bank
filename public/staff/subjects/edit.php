@@ -2,12 +2,12 @@
 
 require_once('../../../private/initialize.php');
 
-if (!isset($_GET['id'])) {
+if(!isset($_GET['id'])) {
   redirect_to(url_for('/staff/subjects/index.php'));
 }
 $id = $_GET['id'];
 
-if (is_post_request()) {
+if(is_post_request()) {
 
   // Handle form values sent by new.php
 
@@ -19,6 +19,7 @@ if (is_post_request()) {
 
   $result = update_subject($subject);
   redirect_to(url_for('/staff/subjects/show.php?id=' . $id));
+
 } else {
 
   $subject = find_subject_by_id($id);
@@ -26,7 +27,9 @@ if (is_post_request()) {
   $subject_set = find_all_subjects();
   $subject_count = mysqli_num_rows($subject_set);
   mysqli_free_result($subject_set);
+
 }
+
 ?>
 
 <?php $page_title = 'Edit Subject'; ?>
@@ -48,26 +51,23 @@ if (is_post_request()) {
         <dt>Position</dt>
         <dd>
           <select name="position">
-            <?php
-            for ($i = 1; $i <= $subject_count; $i++) {
+          <?php
+            for($i=1; $i <= $subject_count; $i++) {
               echo "<option value=\"{$i}\"";
-              if ($subject["position"] == $i) {
+              if($subject["position"] == $i) {
                 echo " selected";
               }
               echo ">{$i}</option>";
             }
-            ?>
+          ?>
           </select>
-
         </dd>
       </dl>
       <dl>
         <dt>Visible</dt>
         <dd>
           <input type="hidden" name="visible" value="0" />
-          <input type="checkbox" name="visible" value="1" <?php if ($subject['visible'] == "1") {
-                                                            echo " checked";
-                                                          } ?> />
+          <input type="checkbox" name="visible" value="1"<?php if($subject['visible'] == "1") { echo " checked"; } ?> />
         </dd>
       </dl>
       <div id="operations">

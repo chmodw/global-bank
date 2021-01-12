@@ -3,10 +3,8 @@
 </footer>
 
 </body>
-
 </html>
 
 <?php
-// disconnecting database
-db_connect($db);
+  db_disconnect($db);
 ?>
