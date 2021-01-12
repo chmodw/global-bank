@@ -50,9 +50,9 @@
   // * spaces count towards length
   // * use trim() if spaces should not count
   function has_length($value, $options) {
-    if(isset($options['min']) && !has_length_greater_than($value, $options['min'] - 1)) {
+    if(isset($options['min']) && !has_length_greater_than($value, $options['min'])) {
       return false;
-    } elseif(isset($options['max']) && !has_length_less_than($value, $options['max'] + 1)) {
+    } elseif(isset($options['max']) && !has_length_less_than($value, $options['max'])) {
       return false;
     } elseif(isset($options['exact']) && !has_length_exactly($value, $options['exact'])) {
       return false;
