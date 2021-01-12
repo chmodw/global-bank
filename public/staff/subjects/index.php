@@ -38,6 +38,7 @@ $subject_set = find_all_subjects();
         </tr>
       <?php } ?>
     </table>
+
     <?php mysqli_free_result($subject_set) ?>
   </div>
 
