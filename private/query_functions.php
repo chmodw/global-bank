@@ -2,10 +2,15 @@
 
   // Subjects
 
-  function find_all_subjects() {
+  function find_all_subjects($options=[]) {
     global $db;
 
+    $visible = $options['visible'] ?? false;
+
     $sql = "SELECT * FROM subjects ";
+    if($visible) {
+      $sql .= "WHERE visible = true ";
+    }
     $sql .= "ORDER BY position ASC";
     //echo $sql;
     $result = mysqli_query($db, $sql);
@@ -13,11 +18,16 @@
     return $result;
   }
 
-  function find_subject_by_id($id) {
+  function find_subject_by_id($id, $options=[]) {
     global $db;
 
+    $visible = $options['visible'] ?? false;
+
     $sql = "SELECT * FROM subjects ";
-    $sql .= "WHERE id='" . db_escape($db, $id) . "'";
+    $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+    if($visible) {
+      $sql .= "AND visible = true";
+    }
     // echo $sql;
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -142,11 +152,16 @@
     return $result;
   }
 
-  function find_page_by_id($id) {
+  function find_page_by_id($id, $options=[]) {
     global $db;
 
+    $visible = $options['visible'] ?? false;
+
     $sql = "SELECT * FROM pages ";
-    $sql .= "WHERE id='" . db_escape($db, $id) . "'";
+    $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+    if($visible) {
+      $sql .= "AND visible = true";
+    }
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     $page = mysqli_fetch_assoc($result);
@@ -277,11 +292,16 @@
     }
   }
 
-  function find_pages_by_subject_id($subject_id) {
+  function find_pages_by_subject_id($subject_id, $options=[]) {
     global $db;
+
+    $visible = $options['visible'] ?? false;
 
     $sql = "SELECT * FROM pages ";
     $sql .= "WHERE subject_id='" . db_escape($db, $subject_id) . "' ";
+    if($visible) {
+      $sql .= "AND visible = true ";
+    }
     $sql .= "ORDER BY position ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
